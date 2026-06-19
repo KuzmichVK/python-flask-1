@@ -1,5 +1,7 @@
+import os
 
 
 class Config(object):
-    # Пропишите  здесь необходимые параметры для подключения базы данных SQLite
-
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI")
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -1,8 +1,9 @@
-<!--Подключите базовый шаблон иопределите начало блока content-->
+{% extends 'base.html' %}
+{% block content %}
 <main>
     <section class="container my-5 px-4 flex-center">
             <h1 class="text-center"><span style="color:red">Fit</span>Track</h1>
-        <!--        Добавьте здесь сообщение : "Произошла ошибка на сервере". -->
+            <h2 class="text-center my-4">Произошла ошибка на сервере</h2>
   </section>
 </main>
-<!--   Определите здесь конец блока content-->
+{% endblock %}

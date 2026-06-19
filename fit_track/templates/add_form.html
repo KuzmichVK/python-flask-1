@@ -1,9 +1,11 @@
-<!--Подключите базовый шаблон иопределите начало блока content-->
-<body>
+{% extends 'base.html' %}
+{% block content %}
   <header class="pb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
       <div align="right" class="container">
-          <!--Здесь необходимо добавить ссылку для перехода на главную страницу, используйте для неё class="nav-link"-->
+          <a class="nav-link" href="{{ url_for('all_workouts_view') }}">
+            На главную
+          </a>
         </div>
    </nav>
   </header>
@@ -18,15 +20,24 @@
       <div class="container">
         <div class="row my-3">
 
-            <!--Добавьте форму, style="margin-bottom: 50px-->
-            <!--Добавьте csrf_token для безопасности -->
-            <!--Добавьте форму согласно заданию и вывод валидационных уведомлений,
-            используйте class="form-control form-control-lg py-1 mb-3", placeholder=form.name_field_form.label.text-->
+          <form method="post" style="margin-bottom: 50px">
+            {{ form.csrf_token }}
+            {% for field in [
+                 form.date, form.exercise, form.weight,
+                 form.num_circles, form.num_reps, form.time
+               ] %}
+              {{ field(class="form-control form-control-lg py-1 mb-3",
+                       placeholder=field.label.text) }}
+              {% for error in field.errors %}
+                <span style="color:red">{{ error }}</span>
+              {% endfor %}
+            {% endfor %}
+            {{ form.submit(class="btn btn-primary btn-lg") }}
+          </form>
 
         </div>
       </div>
 
     </section>
   </main>
-  <!--   Определите здесь конец блока content-->
-</body>
+{% endblock %}

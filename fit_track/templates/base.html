@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FitTrack</title>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <style>
         th, td {
             text-align: center;
@@ -13,7 +14,20 @@
     </style>
 </head>
 <body>
-    <!-- Определите здесь block content, подкулючите footer.html  -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info text-center" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'footer.html' %}
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
